@@ -1,0 +1,6 @@
+## Interface: 50001
+## Title: Dark.Nameplates
+## Author: Darkend / Singularity / Zenedar / EU
+## Version: 0.0.1
+## Notes: Nameplates
+## RequiredDeps: Dark.Core
