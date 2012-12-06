@@ -4,3 +4,7 @@
 ## Version: 0.0.1
 ## Notes: Nameplates
 ## RequiredDeps: Dark.Core
+
+finder.lua
+style.lua
+initialise.lua
