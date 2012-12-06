@@ -14,14 +14,15 @@ local plateFinder = {
 
 		local onUpdate = function()
 
-			for i, frame in ipairs(WorldFrame:GetChildren()) do
+			for i, frame in ipairs({WorldFrame:GetChildren()}) do
 			
-				local id = frame:GetID()
+				if isPlate(frame) and not found[frame] then
 
-				if not found[id] then
+					found[frame] = true
 
-					found[id] = true
-					onNewFrame(frame)
+					if isPlate(frame) then
+						onNewFrame(frame)
+					end
 
 				end
 
@@ -29,7 +30,7 @@ local plateFinder = {
 
 		end
 
-		eventStore.register("", nil, onUpdate)
+		eventStore.registerOnUpdate("DarkNameplates", onUpdate)
 
 	end,	
 
