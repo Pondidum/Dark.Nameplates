@@ -1,15 +1,20 @@
 local addon, ns = ...
-local styler = Dark.core.style
+local core = Dark.core
+local styler = core.style
 
-local initPlate = function(f)
+local getRegionsFor = function(f)
 
-	f.barFrame, f.nameFrame = f:GetChildren()
-	f.nameFrame.name = f.nameFrame:GetRegions()
+	local original = {}
 
-	f.barFrame.threat, f.barFrame.border, f.barFrame.highlight, f.barFrame.level, f.barFrame.boss, f.barFrame.raid, f.barFrame.dragon = f.barFrame:GetRegions()
-	f.barFrame.healthbar, f.barFrame.castbar = f.barFrame:GetChildren()
-	f.barFrame.healthbar.texture =  f.barFrame.healthbar:GetRegions()
-	f.barFrame.castbar.texture, f.barFrame.castbar.border, f.barFrame.castbar.shield, f.barFrame.castbar.icon =  f.barFrame.castbar:GetRegions()
+	original.barFrame, original.nameFrame = f:GetChildren()
+	original.nameFrame.name = original.nameFrame:GetRegions()
+
+	original.barFrame.threat, original.barFrame.border, original.barFrame.highlight, original.barFrame.level, original.barFrame.boss, original.barFrame.raid, original.barFrame.dragon = original.barFrame:GetRegions()
+	original.barFrame.healthbar, original.barFrame.castbar = original.barFrame:GetChildren()
+	original.barFrame.healthbar.texture =  original.barFrame.healthbar:GetRegions()
+	original.barFrame.castbar.texture, original.barFrame.castbar.border, original.barFrame.castbar.shield, original.barFrame.castbar.icon =  original.barFrame.castbar:GetRegions()
+
+	return original
 
 end
 
@@ -25,21 +30,32 @@ local stylePlate = {
 			return
 		end
 
-		print(frame:GetName())
-		initPlate(frame)
+		local original = getRegionsFor(frame)
 
-		local bg = styler.addBackground(frame)
-		bg:ClearAllPoints()
-		bg:SetPoint("LEFT")
-		bg:SetPoint("RIGHT")
-		bg:SetPoint("BOTTOM")
-		bg:SetHeight(config.height)
+		local parent = CreateFrame("Frame", nil, frame)
+		parent:SetPoint("LEFT")
+		parent:SetPoint("RIGHT")
+		parent:SetPoint("BOTTOM")
+		parent:SetHeight(config.height)
 
+		styler.addBackground(parent)
+		styler.addShadow(parent)
+
+		local health = CreateFrame("Statusbar", nil, parent)
+		health:SetStatusBarTexture(core.textures.normal)
+		health:SetAllPoints(parent)
+
+		parent.health = health
+
+		local name = core.ui.createFont(parent)
+		name:SetPoint("TOPLEFT")
+		name:SetPoint("BOTTOMLEFT")
+		name:SetPoint("RIGHT", parent, "CENTER", 0, 0)
+
+		parent.name = name
 
 	end,
 
 }
 
 ns.style = stylePlate
-
-DarkPlate = ns.style
