@@ -9,7 +9,11 @@ local plateFinder = {
 		local found = {}
 
 		local isPlate = function(frame)
-			return frame:GetName():find("NamePlate%d")
+
+			local name = frame:GetName() or ''
+
+			return name:find("NamePlate%d")
+
 		end
 
 		local onUpdate = function()
