@@ -5,6 +5,10 @@
 ## Notes: Nameplates
 ## RequiredDeps: Dark.Core
 
+model.lua
+view.lua
+controller.lua
+
 finder.lua
 style.lua
 initialise.lua
