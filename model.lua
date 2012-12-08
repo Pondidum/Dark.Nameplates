@@ -12,7 +12,7 @@ local model = {
 		container.nameFrame = name
 		container.name 		= name:GetRegions()
 
-		local barRegions 	= container.barFrame:GetRegions()		
+		local barRegions 	= {container.barFrame:GetRegions()}
 
 		container.threat 	= barRegions[1]
 		container.border 	= barRegions[2]
@@ -28,7 +28,7 @@ local model = {
 		container.healthbarTexture 	= healthbar:GetRegions()
 		container.castbar 			= castbar
 
-		local castRegions 		 	= castbar:GetRegions()
+		local castRegions 		 	= {castbar:GetRegions()}
 
 		container.castbarTexture 	= castRegions[1]
 		container.castbarBorder 	= castRegions[2]
