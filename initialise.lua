@@ -1,11 +1,14 @@
 local addon, ns = ...
 
+ns.config = {
+	height = 12
+}
 local initialise = function()
 
 	local createNameplate = function(plate)
 
 		local model = ns.model.new(plate)
-		local view = ns.view.new()
+		local view = ns.view.new(plate)
 
 		ns.controller.hook(model, view)
 
@@ -16,3 +19,5 @@ local initialise = function()
 end
 
 initialise()
+
+Dark.Nameplates = ns

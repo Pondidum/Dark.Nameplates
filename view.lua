@@ -1,5 +1,8 @@
 local addon, ns = ...
 
+local core = Dark.core
+local styler = core.style
+
 local view = {
 	
 	new = function(parent)
@@ -8,7 +11,7 @@ local view = {
 		frame:SetPoint("LEFT")
 		frame:SetPoint("RIGHT")
 		frame:SetPoint("BOTTOM")
-		frame:SetHeight(config.height)
+		frame:SetHeight(ns.config.height)
 
 		styler.addBackground(frame)
 		styler.addShadow(frame)
