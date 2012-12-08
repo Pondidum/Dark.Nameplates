@@ -52,7 +52,7 @@ local controller = {
 
 
 
-		model.frame:SetScript("OnShow", onShow)
+		model.plate:SetScript("OnShow", onShow)
 		model.healthbar:SetScript("OnValueChanged", onHealthChanged)
 
 	end,
