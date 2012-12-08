@@ -8,6 +8,9 @@ local controller = {
 
 		local model, view = model, view
 
+		model.nameFrame:Hide()
+		model.barFrame:Hide()
+
 		local setHealthColor = function()
 
 			local r, g, b = model.healthbar:GetStatusBarColor()
@@ -18,9 +21,9 @@ local controller = {
 				view.health.r, view.health.g, view.health.b = r, g, b
 								
 				if g > .9 and r == 0 and b == 0 then
-					
+
 					-- friendly NPC
-					r, g, b = unpack(reactionColors[3])
+					r, g, b = unpack(reactionColors[5])
 
 				elseif b > .9 and r == 0 and g == 0 then
 					
@@ -30,16 +33,17 @@ local controller = {
 				elseif r > .9 and g == 0 and b == 0 then
 					
 					-- enemy NPC
-					r, g, b = unpack(reactionColors[5])
+					r, g, b = unpack(reactionColors[1])
 
 				elseif (r + g) > 1.8 and b == 0 then
+
 					-- neutral NPC
 					r, g, b = unpack(reactionColors[4])
 
 				elseif (r + g) > 1.06 and b > .9 then
 
 					-- tapped unit
-					r, g, b = unpack(reactionColors[4])
+					r, g, b = .5, .5, .5
 
 				end
 					-- enemy player, use default UI colour
@@ -50,11 +54,28 @@ local controller = {
 		
 		end
 
-		local onShow = function()
-
+		local setUnitText = function()
 			view.name:SetText(model.name:GetText())
-			setHealthColor()
 
+			if model.boss:IsVisible() then
+				view.level:SetText("Boss")
+			elseif model.dragon:IsVisible() then
+
+				if model.dragon:GetTexture() == "Interface\\Tooltips\\EliteNameplateIcon" then
+					view.level:SetText(model.level:GetText() .. " Elite")
+				else
+					view.level:SetText(model.level:GetText() .. " Rare")
+				end
+			else
+				view.level:SetText(model.level:GetText())
+			end	
+
+		end
+
+
+
+		local onShow = function()
+			setUnitText()
 		end
 
 		local onHealthChanged = function(self, value)
@@ -64,20 +85,20 @@ local controller = {
 			view.health:SetMinMaxValues(min, max)
 			view.health:SetValue(value)
 
-			setHealthColor()
-
 		end
 
 
-		local elapsed = 0 
+		local elapsed = 1
 
 		local onUpdate = function(self, e)
 
 			elapsed = elapsed + e
 
-			if elapsed > 1 then
+			if elapsed > .1 then
 				elapsed = 0
-				onShow()
+
+				setUnitText()
+				setHealthColor()
 			end
 
 		end
