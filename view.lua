@@ -22,12 +22,18 @@ local view = {
 
 		frame.health = health
 
-		local name = core.ui.createFont(health, core.fonts.unitframes, 10)
-		name:SetPoint("TOPLEFT")
-		name:SetPoint("BOTTOMLEFT")
-		name:SetPoint("RIGHT", frame, "CENTER", 0, 0)
+		local name = core.ui.createFont(health, nil, 9)
+		name:SetPoint("LEFT")
+		name:SetPoint("RIGHT")
+		name:SetPoint("BOTTOM", health, "TOP", 0, -5)
 
 		frame.name = name
+
+		local level = core.ui.createFont(health, nil, 9)
+		level:SetPoint("LEFT")
+		level:SetPoint("TOP", health, "BOTTOM", 0 , 5)
+
+		frame.level = level
 
 		return frame
 
