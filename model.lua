@@ -5,12 +5,12 @@ local model = {
 	new = function(plate)
 
 		local container = {}
-		local children 	= plate:GetChildren()
+		local bar, name	= plate:GetChildren()
 
-		conrainer.plate 	= plate
-		container.barFrame 	= children[1]
-		container.nameFrame = children[2]
-		container.name 		= children[2]:GetRegions()
+		container.plate 	= plate
+		container.barFrame 	= bar
+		container.nameFrame = name
+		container.name 		= name:GetRegions()
 
 		local barRegions 	= container.barFrame:GetRegions()		
 
@@ -22,13 +22,13 @@ local model = {
 		container.raid 		= barRegions[6]
 		container.dragon 	= barRegions[7]
 
-		local barChildren 	= container.barFrame:GetChildren()
+		local healthbar, castbar	= container.barFrame:GetChildren()
 
-		container.healthbar 		= barChildren[1]
-		container.healthbarTexture 	= barChildren[1]:GetRegions()
-		container.castbar 			= barChildren[2]
+		container.healthbar 		= healthbar
+		container.healthbarTexture 	= healthbar:GetRegions()
+		container.castbar 			= castbar
 
-		local castRegions 		 	= barChildren[2]:GetRegions()
+		local castRegions 		 	= castbar:GetRegions()
 
 		container.castbarTexture 	= castRegions[1]
 		container.castbarBorder 	= castRegions[2]
