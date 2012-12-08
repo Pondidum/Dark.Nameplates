@@ -8,34 +8,52 @@ local controller = {
 
 		local model, view = model, view
 
+		local setHealthColor = function()
 
-		local getColor = function(r, g, b)
+			local r, g, b = model.healthbar:GetStatusBarColor()
 
-			if g > .9 and r == 0 and b == 0 then
-				-- friendly NPC
-				r, g, b = unpack(reactionColors[3])
+			if	r ~= view.health.r or g ~= view.health.g or b ~= view.health.b then
 
-			elseif b > .9 and r == 0 and g == 0 then
-				-- friendly player
-				r, g, b = 0, .3, .6
+				-- store the default colour
+				view.health.r, view.health.g, view.health.b = r, g, b
+								
+				if g > .9 and r == 0 and b == 0 then
+					
+					-- friendly NPC
+					r, g, b = unpack(reactionColors[3])
 
-			elseif r > .9 and g == 0 and b == 0 then
-				-- enemy NPC
-				r, g, b = unpack(reactionColors[5])
+				elseif b > .9 and r == 0 and g == 0 then
+					
+					-- friendly player
+					r, g, b = 0, .3, .6
 
-			elseif (r + g) > 1.8 and b == 0 then
-				-- neutral NPC
-				r, g, b = unpack(reactionColors[4])
+				elseif r > .9 and g == 0 and b == 0 then
+					
+					-- enemy NPC
+					r, g, b = unpack(reactionColors[5])
+
+				elseif (r + g) > 1.8 and b == 0 then
+					-- neutral NPC
+					r, g, b = unpack(reactionColors[4])
+
+				elseif (r + g) > 1.06 and b > .9 then
+
+					-- tapped unit
+					r, g, b = unpack(reactionColors[4])
+
+				end
+					-- enemy player, use default UI colour
+				
+				view.health:SetStatusBarColor(r, g, b)
 
 			end
-			
-			return r, g, b
-
+		
 		end
 
 		local onShow = function()
 
 			view.name:SetText(model.name:GetText())
+			setHealthColor()
 
 		end
 
@@ -46,15 +64,28 @@ local controller = {
 			view.health:SetMinMaxValues(min, max)
 			view.health:SetValue(value)
 
-			view.health:SetStatusBarColor(model.healthbar:GetStatusBarColor())
+			setHealthColor()
 
 		end
 
 
+		local elapsed = 0 
+
+		local onUpdate = function(self, e)
+
+			elapsed = elapsed + e
+
+			if elapsed > 1 then
+				elapsed = 0
+				onShow()
+			end
+
+		end
 
 		model.plate:SetScript("OnShow", onShow)
 		model.healthbar:SetScript("OnValueChanged", onHealthChanged)
 
+		model.plate:SetScript("OnUpdate", onUpdate)
 	end,
 
 }
