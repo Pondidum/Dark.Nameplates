@@ -35,6 +35,13 @@ local view = {
 
 		frame.level = level
 
+		local raid = frame:CreateTexture(nil, "overlay")
+		raid:SetPoint("BOTTOM", health, "TOP")
+		raid:SetSize(16, 16)
+		raid:SetTexture(core.textures.raidmarks)
+
+		frame.raid = raid
+
 		return frame
 
 	end,
