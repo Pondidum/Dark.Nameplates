@@ -61,7 +61,7 @@ local controller = {
 					view.threat:SetBackdropBorderColor(0.95, 0.95, 0.2)
 
 				else 						-- low/none
-					
+
 					view.threat:SetBackdropBorderColor(unpack(colors.shadow))
 
 				end
@@ -130,9 +130,6 @@ local controller = {
 
 			if longElapsed > 1 then
 				longElapsed = 0
-
-				model.nameFrame:Hide()
-				model.barFrame:Hide()
 			end
 
 			if shortElapsed > .1 then
@@ -146,10 +143,18 @@ local controller = {
 
 		end
 
+		local onShownBars = function()
+			model.nameFrame:Hide()
+			model.barFrame:Hide()
+		end
+
 		model.plate:SetScript("OnShow", onShow)
 		model.healthbar:SetScript("OnValueChanged", onHealthChanged)
 
 		model.plate:SetScript("OnUpdate", onUpdate)
+
+		model.nameFrame:SetScript("OnShow", onShownBars)
+		model.barFrame:SetScript("OnShow", onShownBars)
 	end,
 
 }
