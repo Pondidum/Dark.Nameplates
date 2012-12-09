@@ -18,33 +18,27 @@ local controller = {
 				-- store the default colour
 				view.health.r, view.health.g, view.health.b = r, g, b
 								
-				if g > .9 and r == 0 and b == 0 then
-
-					-- friendly NPC
+				if g > .9 and r == 0 and b == 0 then 		-- friendly NPC
+					
 					r, g, b = unpack(reactionColors[5])
 
-				elseif b > .9 and r == 0 and g == 0 then
+				elseif b > .9 and r == 0 and g == 0 then 	-- friendly player
 					
-					-- friendly player
 					r, g, b = 0, .3, .6
 
-				elseif r > .9 and g == 0 and b == 0 then
-					
-					-- enemy NPC
+				elseif r > .9 and g == 0 and b == 0 then 	-- enemy NPC
+										
 					r, g, b = unpack(reactionColors[1])
 
-				elseif (r + g) > 1.8 and b == 0 then
+				elseif (r + g) > 1.8 and b == 0 then 		-- neutral NPC
 
-					-- neutral NPC
 					r, g, b = unpack(reactionColors[4])
 
-				elseif (r + g) > 1.06 and b > .9 then
+				elseif (r + g) > 1.06 and b > .9 then 		-- tapped unit
 
-					-- tapped unit
 					r, g, b = .5, .5, .5
 
-				end
-					-- enemy player, use default UI colour
+				end											-- enemy player, use default UI colour
 				
 				view.health:SetStatusBarColor(r, g, b)
 
@@ -58,18 +52,24 @@ local controller = {
 
 				local r, g, b = model.threat:GetVertexColor()
 
-				if g + b == 0 then
-					--aggro
+				if g + b == 0 then 			-- aggro
+					
 					view.threat:SetBackdropBorderColor(0.95, 0.2, 0.2)
-				elseif b == 0 then
-					--high threat
+
+				elseif b == 0 then			-- high threat
+					
 					view.threat:SetBackdropBorderColor(0.95, 0.95, 0.2)
-				else
+
+				else 						-- low/none
+					
 					view.threat:SetBackdropBorderColor(unpack(colors.shadow))
+
 				end
 
-			else
+			else 							-- low/none
+
 				view.threat:SetBackdropBorderColor(unpack(colors.shadow))
+
 			end
 
 		end
