@@ -1,6 +1,7 @@
 local addon, ns = ...
 
-local reactionColors = Dark.core.colors.reaction
+local colors = Dark.core.colors
+local reactionColors = colors.reaction
 
 local controller = {
 	
@@ -49,6 +50,28 @@ local controller = {
 
 			end
 		
+		end
+
+		local setUnitThreat = function()
+
+			if model.threat:IsShown() then
+
+				local r, g, b = model.threat:GetVertexColor()
+
+				if g + b == 0 then
+					--aggro
+					view.threat:SetBackdropBorderColor(0.95, 0.2, 0.2)
+				elseif b == 0 then
+					--high threat
+					view.threat:SetBackdropBorderColor(0.95, 0.95, 0.2)
+				else
+					view.threat:SetBackdropBorderColor(unpack(colors.shadow))
+				end
+
+			else
+				view.threat:SetBackdropBorderColor(unpack(colors.shadow))
+			end
+
 		end
 
 		local setUnitText = function()
@@ -106,6 +129,8 @@ local controller = {
 			longElapsed = longElapsed + e
 
 			if longElapsed > 1 then
+				longElapsed = 0
+
 				model.nameFrame:Hide()
 				model.barFrame:Hide()
 			end
@@ -116,6 +141,7 @@ local controller = {
 				setUnitText()
 				setHealthColor()
 				setUnitRaidMark()
+				setUnitThreat()
 			end
 
 		end

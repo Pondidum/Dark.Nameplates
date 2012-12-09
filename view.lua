@@ -16,6 +16,8 @@ local view = {
 		styler.addBackground(frame)
 		styler.addShadow(frame)
 
+		frame.threat = frame.shadow
+		
 		local health = CreateFrame("Statusbar", nil, frame)
 		health:SetStatusBarTexture(core.textures.normal)
 		health:SetAllPoints(frame)
