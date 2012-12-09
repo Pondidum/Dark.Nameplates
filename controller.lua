@@ -8,9 +8,6 @@ local controller = {
 
 		local model, view = model, view
 
-		model.nameFrame:Hide()
-		model.barFrame:Hide()
-
 		local setHealthColor = function()
 
 			local r, g, b = model.healthbar:GetStatusBarColor()
@@ -55,7 +52,7 @@ local controller = {
 		end
 
 		local setUnitText = function()
-		
+
 			view.name:SetText(model.name:GetText())
 
 			if model.boss:IsVisible() then
@@ -99,14 +96,22 @@ local controller = {
 		end
 
 
-		local elapsed = 1
+		local shortElapsed = 1
+		local longElapsed = 1
+
 
 		local onUpdate = function(self, e)
 
-			elapsed = elapsed + e
+			shortElapsed = shortElapsed + e
+			longElapsed = longElapsed + e
 
-			if elapsed > .1 then
-				elapsed = 0
+			if longElapsed > 1 then
+				model.nameFrame:Hide()
+				model.barFrame:Hide()
+			end
+
+			if shortElapsed > .1 then
+				shortElapsed = 0
 
 				setUnitText()
 				setHealthColor()
