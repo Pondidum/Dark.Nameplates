@@ -9,9 +9,14 @@ local controller = {
 
 		local model, view = model, view
 
+		local hideModelFrames = function()
+			model.nameFrame:Hide()
+			model.barFrame:Hide()
+		end
+
 		local setHealthColor = function()
 
-			local r, g, b = model.healthbar:GetStatusBarColor()
+			local r, g, b = model.healthBar:GetStatusBarColor()
 
 			if	r ~= view.health.r or g ~= view.health.g or b ~= view.health.b then
 
@@ -105,56 +110,69 @@ local controller = {
 		end
 
 		local onShow = function()
+			hideModelFrames()
 			setUnitText()
 			setUnitRaidMark()
 		end
 
 		local onHealthChanged = function(self, value)
 
-			local min, max	= model.healthbar:GetMinMaxValues()
+			local min, max	= model.healthBar:GetMinMaxValues()
 			
 			view.health:SetMinMaxValues(min, max)
 			view.health:SetValue(value)
 
 		end
 
+		local onCastChange = function(self, value)
 
-		local shortElapsed = 1
-		local longElapsed = 1
+			view.cast:SetMinMaxValues(model.castBar:GetMinMaxValues())
+			view.cast:SetValue(value)
 
+			if model.castBarShield:IsShown() == 1 then
+				view.cast:SetStatusBarColor(0.83, 0.14, 0.14)
+			else
+				view.cast:SetStatusBarColor(0.86, 0.71, 0.18)
+			end
+
+		end
+
+		local elapsed = 1
 
 		local onUpdate = function(self, e)
 
-			shortElapsed = shortElapsed + e
-			longElapsed = longElapsed + e
+			elapsed = elapsed + e
 
-			if longElapsed > 1 then
-				longElapsed = 0
-			end
+			if elapsed > .1 then
+				elapsed = 0
 
-			if shortElapsed > .1 then
-				shortElapsed = 0
-
+				hideModelFrames()
 				setUnitText()
 				setHealthColor()
 				setUnitRaidMark()
 				setUnitThreat()
+
+				if model.castBar:IsShown() then
+					view.cast:Show()
+				else
+					view.cast:Hide()
+				end
+
 			end
 
 		end
 
-		local onShownBars = function()
-			model.nameFrame:Hide()
-			model.barFrame:Hide()
-		end
 
 		model.plate:SetScript("OnShow", onShow)
-		model.healthbar:SetScript("OnValueChanged", onHealthChanged)
+		model.healthBar:SetScript("OnValueChanged", onHealthChanged)
 
 		model.plate:SetScript("OnUpdate", onUpdate)
 
-		model.nameFrame:SetScript("OnShow", onShownBars)
-		model.barFrame:SetScript("OnShow", onShownBars)
+		model.nameFrame:SetScript("OnShow", hideModelFrames)
+		model.barFrame:SetScript("OnShow", hideModelFrames)
+
+		model.castBar:SetScript("OnValueChanged", onCastChange)
+
 	end,
 
 }

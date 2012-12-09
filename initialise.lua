@@ -1,7 +1,8 @@
 local addon, ns = ...
 
 ns.config = {
-	height = 12
+	height = 12,
+	castheight = 8,
 }
 local initialise = function()
 

@@ -17,7 +17,7 @@ local view = {
 		styler.addShadow(frame)
 
 		frame.threat = frame.shadow
-		
+
 		local health = CreateFrame("Statusbar", nil, frame)
 		health:SetStatusBarTexture(core.textures.normal)
 		health:SetAllPoints(frame)
@@ -43,6 +43,22 @@ local view = {
 		raid:SetTexture(core.textures.raidmarks)
 
 		frame.raid = raid
+
+		local cast = CreateFrame("Statusbar", nil, frame)
+		cast:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -5)
+		cast:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -5)
+		cast:SetHeight(ns.config.castheight)
+		cast:SetStatusBarTexture(core.textures.normal)
+		cast:Hide()
+
+		styler.addBackground(cast)
+		styler.addShadow(cast)
+
+		local castName = core.ui.createFont(cast, nil, 9)
+		castName:SetAllPoints(cast)
+
+		frame.cast = cast
+		frame.castName = castName
 
 		return frame
 

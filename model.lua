@@ -22,18 +22,18 @@ local model = {
 		container.raid 		= barRegions[6]
 		container.dragon 	= barRegions[7]
 
-		local healthbar, castbar	= container.barFrame:GetChildren()
+		local healthBar, castBar	= container.barFrame:GetChildren()
 
-		container.healthbar 		= healthbar
-		container.healthbarTexture 	= healthbar:GetRegions()
-		container.castbar 			= castbar
+		container.healthBar 		= healthBar
+		container.healthBarTexture 	= healthBar:GetRegions()
+		container.castBar 			= castBar
 
-		local castRegions 		 	= {castbar:GetRegions()}
+		local castRegions 		 	= {castBar:GetRegions()}
 
-		container.castbarTexture 	= castRegions[1]
-		container.castbarBorder 	= castRegions[2]
-		container.castbarShield 	= castRegions[3]
-		container.castbarIcon 		= castRegions[4]
+		container.castBarTexture 	= castRegions[1]
+		container.castBarBorder 	= castRegions[2]
+		container.castBarShield 	= castRegions[3]
+		container.castBarIcon 		= castRegions[4]
 
 		return container
 
