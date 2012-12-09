@@ -55,6 +55,7 @@ local controller = {
 		end
 
 		local setUnitText = function()
+		
 			view.name:SetText(model.name:GetText())
 
 			if model.boss:IsVisible() then
@@ -72,10 +73,20 @@ local controller = {
 
 		end
 
+		local setUnitRaidMark = function()
 
+			if model.raid:IsShown() then
+				view.raid:Show()
+				view.raid:SetTexCoord(model.raid:GetTexCoord())
+			else
+				view.raid:Hide()
+			end
+
+		end
 
 		local onShow = function()
 			setUnitText()
+			setUnitRaidMark()
 		end
 
 		local onHealthChanged = function(self, value)
@@ -99,6 +110,7 @@ local controller = {
 
 				setUnitText()
 				setHealthColor()
+				setUnitRaidMark()
 			end
 
 		end
