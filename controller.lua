@@ -129,6 +129,8 @@ local controller = {
 			view.cast:SetMinMaxValues(model.castBar:GetMinMaxValues())
 			view.cast:SetValue(value)
 
+			view.castIcon:SetTexture(model.castBarIcon:GetTexture())
+
 			if model.castBarShield:IsShown() == 1 then
 				view.cast:SetStatusBarColor(0.83, 0.14, 0.14)
 			else

@@ -47,18 +47,31 @@ local view = {
 		local cast = CreateFrame("Statusbar", nil, frame)
 		cast:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -5)
 		cast:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -5)
-		cast:SetHeight(ns.config.castheight)
+		cast:SetHeight(ns.config.castHeight)
 		cast:SetStatusBarTexture(core.textures.normal)
-		cast:Hide()
 
 		styler.addBackground(cast)
 		styler.addShadow(cast)
+
+		local castIcon = CreateFrame("Frame", nil, cast)
+		castIcon:SetPoint("RIGHT", cast, "LEFT", -3, 0)
+		castIcon:SetSize(ns.config.castIconHeight, ns.config.castIconHeight)
+
+		styler.addBackground(castIcon)
+		styler.addShadow(castIcon)
+
+		local icon = castIcon:CreateTexture(nil, "overlay")
+		icon:SetTexCoord(.08, .92, .08, .92)
+		icon:SetAllPoints(castIcon)
 
 		local castName = core.ui.createFont(cast, nil, 9)
 		castName:SetAllPoints(cast)
 
 		frame.cast = cast
+		frame.castIcon = icon
 		frame.castName = castName
+
+		cast:Hide()
 
 		return frame
 
