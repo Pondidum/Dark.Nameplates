@@ -11,4 +11,5 @@ controller.lua
 
 finder.lua
 style.lua
+colorPicker.lua
 initialise.lua

@@ -22,4 +22,4 @@ end
 
 initialise()
 
-Dark.Nameplates = ns
+Dark.nameplates = ns
