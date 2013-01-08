@@ -42,7 +42,7 @@ local controller = {
 
 			if model.boss:IsVisible() then
 				view.level:SetText("Boss")
-			elseif model.dragon:IsVisible() then
+			elseif model.dragon:IsShown() then
 
 				if model.dragon:GetTexture() == "Interface\\Tooltips\\EliteNameplateIcon" then
 					view.level:SetText(model.level:GetText() .. " Elite")
