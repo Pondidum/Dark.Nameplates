@@ -1,5 +1,8 @@
 local addon, ns = ...
 
+local colors = Dark.core.colors
+local reactionColors = colors.reaction
+
 local colorPicker = {
 	
 	fromUnitHealth = function(r, g, b)

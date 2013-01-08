@@ -5,11 +5,12 @@
 ## Notes: Nameplates
 ## RequiredDeps: Dark.Core
 
+colorPicker.lua
+
 model.lua
 view.lua
 controller.lua
 
 finder.lua
 style.lua
-colorPicker.lua
 initialise.lua

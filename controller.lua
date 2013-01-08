@@ -1,7 +1,6 @@
 local addon, ns = ...
 
 local colors = Dark.core.colors
-local reactionColors = colors.reaction
 local colorPicker = ns.colorPicker
 
 local controller = {
