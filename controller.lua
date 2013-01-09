@@ -44,10 +44,12 @@ local controller = {
 				view.level:SetText("Boss")
 			elseif model.dragon:IsShown() then
 
+				local level = model.level:GetText() or ""
+
 				if model.dragon:GetTexture() == "Interface\\Tooltips\\EliteNameplateIcon" then
-					view.level:SetText(model.level:GetText() .. " Elite")
+					view.level:SetText(level .. " Elite")
 				else
-					view.level:SetText(model.level:GetText() .. " Rare")
+					view.level:SetText(level .. " Rare")
 				end
 				
 			else
