@@ -3,9 +3,21 @@ local addon, ns = ...
 local colors = Dark.core.colors
 local reactionColors = colors.reaction
 
+ local fixColor = function(r, g, b)
+    r = floor(r * 100 + .5) / 100
+    g = floor(g * 100 + .5) / 100
+    b = floor(b * 100 + .5) / 100
+
+    return r, g, b
+end
+
 local colorPicker = {
 	
+	fix = fixColor,
+
 	fromUnitHealth = function(r, g, b)
+
+		r, g, b = fixColor(r, g, b)
 
 		if g > .9 and r == 0 and b == 0 then 		-- friendly NPC
 			
@@ -23,7 +35,7 @@ local colorPicker = {
 
 			r, g, b = unpack(reactionColors[4])
 
-		elseif (r + g) > 1.06 and b > .9 then 		-- tapped unit
+		elseif r == 0.53 and g == 0.53 and b == 1 then 		-- tapped unit
 
 			r, g, b = .5, .5, .5
 
