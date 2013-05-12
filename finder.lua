@@ -1,5 +1,5 @@
 local addon, ns = ...
-local eventStore = Dark.core.events
+local eventStore = Dark.core.events.new()
 
 local plateFinder = {
 
@@ -34,7 +34,7 @@ local plateFinder = {
 
 		end
 
-		eventStore.registerOnUpdate("DarkNameplates", onUpdate)
+		eventStore.registerOnUpdate(onUpdate)
 
 	end,	
 
