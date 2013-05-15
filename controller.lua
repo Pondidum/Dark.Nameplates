@@ -1,6 +1,9 @@
 local addon, ns = ...
+local core = Dark.core
 
-local colors = Dark.core.colors
+local colors = core.colors
+local textures = core.textures
+
 local colorPicker = ns.colorPicker
 
 local controller = {
@@ -70,9 +73,21 @@ local controller = {
 		end
 
 		local hideModelFrames = function()
-			model.nameFrame:Hide()
-			model.barFrame:Hide()
-			model.level:Hide()
+
+			model.threat:SetTexCoord( 0, 0, 0, 0 )        
+			model.border:SetTexCoord( 0, 0, 0, 0 )                     
+			model.castBarBorder:SetTexCoord( 0, 0, 0, 0 )
+			model.castBarShield:SetTexCoord( 0, 0, 0, 0 )
+			model.boss:SetTexCoord( 0, 0, 0, 0 )         
+			model.dragon:SetTexCoord( 0, 0, 0, 0 )         
+			model.name:SetWidth( 000.1 )                      
+			model.level:SetWidth( 000.1 )                     
+			model.castBarIcon:SetTexCoord( 0, 0, 0, 0 )         
+			model.castBarIcon:SetWidth(.001)
+			model.raid:SetAlpha( 0 )                      
+			model.highlight:SetTexture(nil)
+			model.healthBar:SetStatusBarTexture(textures.empty)
+			model.castBar:SetStatusBarTexture(textures.empty)
 		end
 		
 		local hideTextures = function()
@@ -80,7 +95,6 @@ local controller = {
 		end
 
 		local onShow = function()
-			hideModelFrames()
 			hideTextures()
 			setUnitText()
 			setUnitRaidMark()
@@ -119,7 +133,6 @@ local controller = {
 			if elapsed > .1 then
 				elapsed = 0
 
-				hideModelFrames()
 				setUnitText()
 				setHealthColor()
 				setUnitRaidMark()
@@ -145,6 +158,8 @@ local controller = {
 		model.barFrame:SetScript("OnShow", hideModelFrames)
 
 		model.castBar:SetScript("OnValueChanged", onCastChange)
+
+		hideModelFrames()
 
 	end,
 
