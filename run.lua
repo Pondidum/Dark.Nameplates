@@ -11,7 +11,7 @@ local initialise = function()
 
 	end
 
-	local finder = ns.finder.new(createNameplate)
+	local finder = ns.finder:new(createNameplate)
 
 end
 

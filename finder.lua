@@ -1,47 +1,48 @@
 local addon, ns = ...
-local eventStore = Dark.core.events.new()
 
-local plateFinder = {
+local class = ns.lib.class
+local updates = ns.lib.mixins.updates
 
-	new = function(onNewFrame)
+local finder = class:extend({
 
-		local onNewFrame = onNewFrame or function() end
-		local found = {}
+	ctor = function(self, onNewFrame)
+		self:include(updates)
 
-		local isPlate = function(frame)
+		self.onNewFrame = onNewFrame
+		self.found = {}
+	end,
 
-			local name = frame:GetName() or ''
+	isPlate = function(self, frame)
 
+		local name = frame:GetName()
+
+		if name then
 			return name:find("NamePlate%d")
-
 		end
 
-		local onUpdate = function()
+		return false
 
-			local count = select("#", WorldFrame:GetChildren())
+	end,
 
-			for i = 1, count do
-				
-				local frame = select(i, WorldFrame:GetChildren())
+	onUpdate = function(self, elapsed)
 
-				if isPlate(frame) and not found[frame] then
+		local count = select("#", WorldFrame:GetChildren())
 
-					found[frame] = true
+		for i = 1, count do
 
-					if isPlate(frame) then
-						onNewFrame(frame)
-					end
+			local frame = select(i, WorldFrame:GetChildren())
 
-				end
+			if self:isPlate(frame) and not self.found[frame] then
+
+				self.found[frame] = true
+				self.onNewFrame(frame)
 
 			end
 
 		end
 
-		eventStore.registerOnUpdate(onUpdate)
+	end,
 
-	end,	
+})
 
-}
-
-ns.finder = plateFinder
+ns.finder = finder
