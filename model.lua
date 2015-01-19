@@ -1,7 +1,7 @@
 local addon, ns = ...
 
 local model = {
-	
+
 	new = function(plate)
 
 		local container = {}
