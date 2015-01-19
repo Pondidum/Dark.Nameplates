@@ -1,10 +1,12 @@
 local addon, ns = ...
 
-local core = Dark.core
-local styler = core.style
+local textures = ns.lib.media.textures
+local style = ns.lib.style
+
+local createFont = Dark.core.ui.createFont
 
 local view = {
-	
+
 	new = function(parent)
 
 		local frame = CreateFrame("Frame", nil, parent)
@@ -13,25 +15,24 @@ local view = {
 		frame:SetPoint("BOTTOM")
 		frame:SetHeight(ns.config.height)
 
-		styler.addBackground(frame)
-		styler.addShadow(frame)
+		style:frame(frame)
 
-		frame.threat = frame.shadow
+		frame.threat = frame.bg
 
 		local health = CreateFrame("Statusbar", nil, frame)
-		health:SetStatusBarTexture(core.textures.normal)
+		health:SetStatusBarTexture(textures.normal)
 		health:SetAllPoints(frame)
 
 		frame.health = health
 
-		local name = core.ui.createFont(health, nil, 9)
+		local name = createFont(health, nil, 9)
 		name:SetPoint("LEFT")
 		name:SetPoint("RIGHT")
 		name:SetPoint("BOTTOM", health, "TOP", 0, -5)
 
 		frame.name = name
 
-		local level = core.ui.createFont(health, nil, 9)
+		local level = createFont(health, nil, 9)
 		level:SetPoint("LEFT")
 		level:SetPoint("TOP", health, "BOTTOM", 0 , 5)
 
@@ -40,7 +41,7 @@ local view = {
 		local raid = frame:CreateTexture(nil, "overlay")
 		raid:SetPoint("BOTTOM", health, "TOP")
 		raid:SetSize(16, 16)
-		raid:SetTexture(core.textures.raidmarks)
+		raid:SetTexture(textures.raidmarks)
 
 		frame.raid = raid
 
@@ -48,23 +49,21 @@ local view = {
 		cast:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -5)
 		cast:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -5)
 		cast:SetHeight(ns.config.castHeight)
-		cast:SetStatusBarTexture(core.textures.normal)
+		cast:SetStatusBarTexture(textures.normal)
 
-		styler.addBackground(cast)
-		styler.addShadow(cast)
+		style:frame(cast)
 
 		local castIcon = CreateFrame("Frame", nil, cast)
 		castIcon:SetPoint("RIGHT", cast, "LEFT", -3, 0)
 		castIcon:SetSize(ns.config.castIconHeight, ns.config.castIconHeight)
 
-		styler.addBackground(castIcon)
-		styler.addShadow(castIcon)
+		style:frame(castIcon)
 
 		local icon = castIcon:CreateTexture(nil, "overlay")
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:SetAllPoints(castIcon)
 
-		local castName = core.ui.createFont(cast, nil, 9)
+		local castName = createFont(cast, nil, 9)
 		castName:SetAllPoints(cast)
 
 		frame.cast = cast
