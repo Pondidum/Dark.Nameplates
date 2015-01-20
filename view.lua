@@ -1,9 +1,21 @@
 local addon, ns = ...
 
 local textures = ns.lib.media.textures
+local fonts = ns.lib.media.fonts
 local style = ns.lib.style
 
-local createFont = Dark.core.ui.createFont
+local createFont = function(parent)
+
+	local fs = parent:CreateFontString(nil, "OVERLAY")
+
+	fs:SetFont(fonts.normal, 9)
+	fs:SetJustifyH("LEFT")
+	fs:SetShadowColor(0, 0, 0)
+	fs:SetShadowOffset(1.25, -1.25)
+
+	return fs
+
+end
 
 local view = {
 
