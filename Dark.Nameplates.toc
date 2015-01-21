@@ -3,7 +3,7 @@
 ## Author: Darkend / DarkStorm / Zenedar / EU
 ## Version: 0.0.1
 ## Notes: Nameplates
-## RequiredDeps: Dark.Core
+## RequiredDeps: Dark
 
 config.lua
 initialise.lua
