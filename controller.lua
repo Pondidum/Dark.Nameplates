@@ -7,7 +7,7 @@ local textures = core.textures
 local colorPicker = ns.colorPicker
 
 local controller = {
-	
+
 	hook = function(model, view)
 
 		local model, view = model, view
@@ -23,7 +23,7 @@ local controller = {
 				view.health:SetStatusBarColor(colorPicker.fromUnitHealth(r, g, b))
 
 			end
-		
+
 		end
 
 		local setUnitThreat = function()
@@ -54,10 +54,10 @@ local controller = {
 				else
 					view.level:SetText(level .. " Rare")
 				end
-				
+
 			else
 				view.level:SetText(model.level:GetText())
-			end	
+			end
 
 		end
 
@@ -74,22 +74,22 @@ local controller = {
 
 		local hideModelFrames = function()
 
-			model.threat:SetTexCoord( 0, 0, 0, 0 )        
-			model.border:SetTexCoord( 0, 0, 0, 0 )                     
+			model.threat:SetTexCoord( 0, 0, 0, 0 )
+			model.border:SetTexCoord( 0, 0, 0, 0 )
 			model.castBarBorder:SetTexCoord( 0, 0, 0, 0 )
 			model.castBarShield:SetTexCoord( 0, 0, 0, 0 )
-			model.boss:SetTexCoord( 0, 0, 0, 0 )         
-			model.dragon:SetTexCoord( 0, 0, 0, 0 )         
-			model.name:SetWidth( 000.1 )                      
-			model.level:SetWidth( 000.1 )                     
-			model.castBarIcon:SetTexCoord( 0, 0, 0, 0 )         
+			model.boss:SetTexCoord( 0, 0, 0, 0 )
+			model.dragon:SetTexCoord( 0, 0, 0, 0 )
+			model.name:SetWidth( 000.1 )
+			model.level:SetWidth( 000.1 )
+			model.castBarIcon:SetTexCoord( 0, 0, 0, 0 )
 			model.castBarIcon:SetWidth(.001)
-			model.raid:SetAlpha( 0 )                      
+			model.raid:SetAlpha( 0 )
 			model.highlight:SetTexture(nil)
 			model.healthBar:SetStatusBarTexture(textures.empty)
 			model.castBar:SetStatusBarTexture(textures.empty)
 		end
-		
+
 		local hideTextures = function()
 			model.border:SetTexture("")
 		end
@@ -103,7 +103,7 @@ local controller = {
 		local onHealthChanged = function(self, value)
 
 			local min, max	= model.healthBar:GetMinMaxValues()
-			
+
 			view.health:SetMinMaxValues(min, max)
 			view.health:SetValue(value)
 
