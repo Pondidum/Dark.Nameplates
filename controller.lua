@@ -1,16 +1,13 @@
 local addon, ns = ...
-local core = Dark.core
 
-local colors = core.colors
-local textures = core.textures
+local colors = ns.lib.media.colors
+local textures = ns.lib.media.textures
 
 local colorPicker = ns.colorPicker
 
 local controller = {
 
 	hook = function(model, view)
-
-		local model, view = model, view
 
 		local setHealthColor = function()
 
