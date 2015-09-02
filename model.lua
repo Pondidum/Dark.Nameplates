@@ -22,7 +22,7 @@ local model = {
 		container.raid 		= barRegions[6]
 		container.dragon 	= barRegions[7]
 
-		local healthBar, castBar	= container.barFrame:GetChildren()
+		local healthBar, absorbBar, castBar	= container.barFrame:GetChildren()
 
 		container.healthBar 		= healthBar
 		container.healthBarTexture 	= healthBar:GetRegions()

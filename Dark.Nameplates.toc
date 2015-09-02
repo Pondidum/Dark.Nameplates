@@ -1,7 +1,7 @@
-## Interface: 50001
+## Interface: 60200
 ## Title: Dark.Nameplates
 ## Author: Darkend / DarkStorm / Zenedar / EU
-## Version: 0.0.1
+## Version: 0.0.2
 ## Notes: Nameplates
 ## RequiredDeps: Dark
 
